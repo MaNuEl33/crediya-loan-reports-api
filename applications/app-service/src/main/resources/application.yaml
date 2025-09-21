@@ -1,14 +1,45 @@
-##Spring Configuration
 server:
   port: 8080
 spring:
   application:
-    name: LoanReportsApi
+    name: "LoanReportsApi"
   devtools:
     add-properties: false
   h2:
     console:
       enabled: true
-      path: /h2
+      path: "/h2"
   profiles:
-    include:
+    include: null
+  jackson:
+    default-property-inclusion: "non_null"
+    property-naming-strategy: "SNAKE_CASE"
+routes:
+  paths:
+    loan-reports:
+      accepted-loans-report: "/api/v1/reportes"
+jwt:
+  secret: "${JWT_SECRET}"
+aws:
+  dynamodb:
+    region: "${DYNAMODB_REGION}"
+entrypoint:
+  sqs:
+    region: "${SQS_REGION}"
+    endpoint: "${SQS_ENDPOINT}"
+    queueUrl: "${SQS_ACCEPTED_LOAN_APPLICATIONS_QUEUE_URL}"
+    waitTimeSeconds: 20
+    maxNumberOfMessages: 10
+    visibilityTimeoutSeconds: 10
+    numberOfThreads: 1
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,prometheus"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+cors:
+  allowed-origins: "http://localhost:4200,http://localhost:8080"

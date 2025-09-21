@@ -6,6 +6,11 @@ buildscript {
 		jacocoVersion = '0.8.13'
 		pitestVersion = '1.19.0-rc.1'
         lombokVersion = '1.18.38'
+        jjwtVersion = '0.12.7'
+        mapStructVersion = '1.6.2'
+        lombokMapStructBindingVersion = '0.2.0'
+        springDocOpenApiVersion = '2.8.13'
+        jacksonVersion = '2.20.0'
 	}
 }
 
